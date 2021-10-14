@@ -1,4 +1,8 @@
 let BoardValues = [new Array(3), new Array(3)];
+function MakeMove(id)
+{
+   alert(id);
+}
 function CreateBoard(Board)
 {
     for (let row= 0; row < BoardValues[0].length; row++)
@@ -9,7 +13,8 @@ function CreateBoard(Board)
         {
             var Cell = document.createElement("td");
             var CellButton = document.createElement("button");
-            CellButton.id = column.toString() + "," +  row.toString();
+            var CellButtonId ="'" + column.toString() + "," +  row.toString() + "'";
+            CellButton.setAttribute("onClick", "MakeMove(" + CellButtonId + ")");
             Cell.appendChild(CellButton);
             Row.appendChild(Cell)
         }
@@ -17,3 +22,4 @@ function CreateBoard(Board)
     }
     
 }
+
