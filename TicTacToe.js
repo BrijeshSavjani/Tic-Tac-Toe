@@ -25,7 +25,7 @@ function SpearmansRank(Moves)
     let MovesXRanked = []; letMovesYRanked =[];
     for(let index = 0;index < Moves.length;index++)
     {
-        MovesXRanked.push(MovesXSorted.indexOf(Moves[index]));
+        MovesXRanked.push(MovesXSorted.indexOf(MovesX[index]));
         MovesYRanked.push(MovesYSorted.indexOf(MovesY[index]));
     }
     let MovesRankedDifference = 0;
@@ -34,7 +34,7 @@ function SpearmansRank(Moves)
 }
 function CheckWinConditions(MovesMade)
 {
-    
+
 }
 function MakeMove(id)
 {
