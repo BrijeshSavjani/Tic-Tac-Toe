@@ -17,26 +17,25 @@ function CreateBoard(Board)
         }
         Board.appendChild(Row);}}
 function ChangeUser(){PlayerXTurn = !PlayerXTurn;}
-function CheckDimension(MovesMade1Dimension)
+function SpearmansRank(Moves)
 {
-    var won = false;
-    MovesMade1Dimension.sort();
-    MovesMade1Dimension.forEach((element,index,array) =>
+    let MovesX = []; let MovesY = [];
+    Moves.forEach((element) =>  {MovesX.push(element.x);MovesY.push(element.y);}) ;
+    let MovesXSorted = MovesX.sort(); let MovesYSorted = MovesY.sort(); 
+    let MovesXRanked = []; letMovesYRanked =[];
+    for(let index = 0;index < Moves.length;index++)
     {
-        for(let i =0;i < array.length;i++){
-            try{
-                if (element == array[i] && element == array[i+1]){won = true;}
-                if (Math.abs(element - array[i] - array[i+1]) == 1 ){won = true;}
-            }finally{}
-    }}); 
-    return won;}
+        MovesXRanked.push(MovesXSorted.indexOf(Moves[index]));
+        MovesYRanked.push(MovesYSorted.indexOf(MovesY[index]));
+    }
+    let MovesRankedDifference = 0;
+    Moves.forEach((element,index) => {MovesDifference += (parseInt(MovesXRanked[index]) - parseInt(MovesYRanked[index]));});
+    return 1 - ((6 * (MovesRankedDifference)^2)/(Moves.length * ((Moves.length)^2) - 1));
+}
 function CheckWinConditions(MovesMade)
 {
-    let MovesMadeX = []; let MovesMadeY = [];
-    var won = false;
-    MovesMade.forEach((element) =>  {MovesMadeX.push(element.x);MovesMadeY.push(element.y);}) ;
-    won = CheckDimension(MovesMadeX) || CheckDimension(MovesMadeY);
-    return won;}
+    
+}
 function MakeMove(id)
 {
     var CellValue = document.getElementById(id);
@@ -45,7 +44,7 @@ function MakeMove(id)
         if (PlayerXTurn){CellValue.innerText = "X";PlayerX.push(new Coordinate(id));}
         else{CellValue.innerText ="0"; Player0.push(new Coordinate(id));}
         ChangeUser();
-        if (CheckWinConditions(PlayerX) || CheckWinConditions(Player0)){alert("Game Over");}
+        // if (CheckWinConditions(PlayerX) || CheckWinConditions(Player0)){alert("Game Over");}
     }
     else {alert("Grid is occupied");}}
 
