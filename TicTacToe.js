@@ -1,6 +1,7 @@
 let PlayerXTurn = false 
 let PlayerX = []; let Player0 = [];
-class Coordinate{ constructor(id){this.x = id[0];this.y= id[2];}}
+class Coordinate{ constructor(id){this.x = parseInt(id[0]);this.y= parseInt(id[2]);}}
+function DecsendingSort(list){return list.sort((function(a, b){return b-a}))}
 function CreateBoard(Board)
 {
     for (let row= 0; row < 3; row++)
@@ -21,16 +22,16 @@ function SpearmansRank(Moves)
 {
     let MovesX = []; let MovesY = [];
     Moves.forEach((element) =>  {MovesX.push(element.x);MovesY.push(element.y);}) ;
-    let MovesXSorted = MovesX.sort(); let MovesYSorted = MovesY.sort(); 
-    let MovesXRanked = []; letMovesYRanked =[];
+    let MovesXSorted = DecsendingSort( Array.from(MovesX)); let MovesYSorted = DecsendingSort(Array.from(MovesY));
+    let MovesXRanked = []; let MovesYRanked =[];
     for(let index = 0;index < Moves.length;index++)
     {
-        MovesXRanked.push(MovesXSorted.indexOf(MovesX[index]));
-        MovesYRanked.push(MovesYSorted.indexOf(MovesY[index]));
+        MovesXRanked.push(MovesXSorted.indexOf(MovesX[index]) + 1);
+        MovesYRanked.push(MovesYSorted.indexOf(MovesY[index]) + 1);
     }
-    let MovesRankedDifference = 0;
-    Moves.forEach((element,index) => {MovesDifference += (parseInt(MovesXRanked[index]) - parseInt(MovesYRanked[index]));});
-    return 1 - ((6 * (MovesRankedDifference)^2)/(Moves.length * ((Moves.length)^2) - 1));
+    let MovesRankDifference = 0;
+    Moves.forEach((element,index) => {MovesRankDifference += ((MovesXRanked[index]) - (MovesYRanked[index]))**2;});
+    return 1 - ((6 * MovesRankDifference)/ (Moves.length * ((Moves.length**2) - 1)));
 }
 function CheckWinConditions(MovesMade)
 {
